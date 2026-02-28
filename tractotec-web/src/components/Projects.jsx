@@ -1,58 +1,82 @@
-import { Factory, Truck, Cog } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
 
-function Projects() {
+function ProjectsPreview() {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/proyectos");
+    window.scrollTo(0, 0);
+  };
+
   const projects = [
     {
-      icon: <Factory size={60} />,
-      title: "Fabricación de Tolva Minera",
+      title: "Traccionamiento",
+      image: "/images/proyectos/Traccionamiento/virado_chasis/img_3.jpeg",
     },
     {
-      icon: <Truck size={60} />,
-      title: "Carreta Agrícola Reforzada",
+      title: "Mantenimiento",
+      image: "/images/proyectos/Mantenimiento/mantenimiento-maquinaria/img_7.jpeg",
     },
     {
-      icon: <Cog size={60} />,
-      title: "Sistema de Traccionamiento Industrial",
+      title: "Fabricación",
+      image: "/images/proyectos/Fabricación/fabricacion_tolvas/img_7.jpeg",
     },
   ];
 
   return (
-    <section id="proyectos" className="bg-black py-24 text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-black py-24 text-white relative overflow-hidden">
+      
+      {/* Fondo sutil industrial */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black"></div>
 
-        {/* Separador */}
-        <div className="w-full h-[2px] bg-red-600 mb-16"></div>
+      <div className="relative max-w-7xl mx-auto px-6">
 
         {/* Título */}
         <h2 className="text-4xl font-bold mb-4">
-          Nuestros <span className="text-red-600">Proyectos</span>
+          Galería de <span className="text-red-600">Proyectos</span>
         </h2>
 
         <div className="w-20 h-1 bg-red-600 mb-16"></div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-10">
+        {/* Grid imágenes */}
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-gray-900 border border-gray-800 rounded-lg p-10 text-center hover:border-red-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
+              onClick={handleNavigation}
+              className="cursor-pointer relative group overflow-hidden rounded-lg border border-gray-800 hover:border-red-600 transition-all duration-300"
             >
-              {/* Icono */}
-              <div className="text-yellow-500 mb-6 group-hover:text-red-600 transition-colors duration-300 flex justify-center">
-                {project.icon}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-300"></div>
+
+              {/* Título centrado */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h3 className="text-2xl font-bold text-white group-hover:text-red-500 transition-colors duration-300">
+                  {project.title}
+                </h3>
               </div>
 
-              {/* Título */}
-              <h3 className="text-xl font-semibold mb-4">
-                {project.title}
-              </h3>
-
-              {/* Badge */}
-              <span className="text-xs uppercase tracking-wider bg-red-600/20 text-red-600 px-3 py-1 rounded-full">
-                Proyecto Referencial
-              </span>
+              {/* Línea animada inferior */}
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-500"></div>
             </div>
           ))}
+        </div>
+
+        {/* Botón */}
+        <div className="text-center">
+          <Link
+            to="/proyectos"
+            onClick={() => window.scrollTo(0, 0)}
+            className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30"
+          >
+            Ver todos los proyectos
+          </Link>
         </div>
 
       </div>
@@ -60,4 +84,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default ProjectsPreview;

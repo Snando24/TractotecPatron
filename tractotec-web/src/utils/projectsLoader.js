@@ -12,6 +12,36 @@ export function loadProjects() {
 
   // Estructura base de proyectos
   const projectsStructure = {
+    "Traccionamiento/traccionamiento_chasis": {
+      title: "Traccionamiento de Chasis",
+      category: "Traccionamiento",
+      path: "Traccionamiento/traccionamiento_chasis",
+    },
+    "Traccionamiento/virado_chasis": {
+      title: "Virado de Chasis",
+      category: "Traccionamiento",
+      path: "Traccionamiento/virado_chasis",
+    },
+    "Traccionamiento/reforzado_chasis": {
+      title: "Reforzado de Chasis",
+      category: "Traccionamiento",
+      path: "Traccionamiento/reforzado_chasis",
+    },
+    "Traccionamiento/traccionamiento-cabinas": {
+      title: "Traccionamiento Cabinas",
+      category: "Traccionamiento",
+      path: "Traccionamiento/traccionamiento-cabinas",
+    },
+    "pintura-industrial": {
+      title: "Pintura Industrial",
+      category: "Pintura Industrial",
+      path: "pintura-industrial",
+    },
+    "reparacion-pistones": {
+      title: "Reparación de Pistones",
+      category: "Reparación Pistones",
+      path: "reparacion-pistones",
+    },
     "Fabricación/fabricacion_lampones": {
       title: "Fabricación de Lampones",
       category: "Fabricación",
@@ -36,36 +66,6 @@ export function loadProjects() {
       title: "Trabajos en Mina",
       category: "Mantenimiento",
       path: "Mantenimiento/trabajos-mina",
-    },
-    "Traccionamiento/reforzado_chasis": {
-      title: "Reforzado de Chasis",
-      category: "Traccionamiento",
-      path: "Traccionamiento/reforzado_chasis",
-    },
-    "Traccionamiento/traccionamiento_chasis": {
-      title: "Traccionamiento de Chasis",
-      category: "Traccionamiento",
-      path: "Traccionamiento/traccionamiento_chasis",
-    },
-    "Traccionamiento/traccionamiento-cabinas": {
-      title: "Traccionamiento Cabinas",
-      category: "Traccionamiento",
-      path: "Traccionamiento/traccionamiento-cabinas",
-    },
-    "Traccionamiento/virado_chasis": {
-      title: "Virado de Chasis",
-      category: "Traccionamiento",
-      path: "Traccionamiento/virado_chasis",
-    },
-    "pintura-industrial": {
-      title: "Pintura Industrial",
-      category: "Pintura Industrial",
-      path: "pintura-industrial",
-    },
-    "reparacion-pistones": {
-      title: "Reparación de Pistones",
-      category: "Reparación Pistones",
-      path: "reparacion-pistones",
     },
   };
 

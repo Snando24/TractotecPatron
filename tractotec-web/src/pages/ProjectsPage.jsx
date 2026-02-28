@@ -12,9 +12,20 @@ function ProjectsPage() {
 
   // Extraer categorías únicas de los proyectos
   const categories = useMemo(() => {
-    const cats = new Set(projects.map((p) => p.category));
-    return ["Todos", ...Array.from(cats).sort()];
-  }, [projects]);
+  const desiredOrder = [
+    "Traccionamiento",
+    "Pintura Industrial",
+    "Reparación Pistones",
+    "Fabricación",
+    "Mantenimiento",
+  ];
+
+  const cats = new Set(projects.map((p) => p.category));
+
+  const ordered = desiredOrder.filter((cat) => cats.has(cat));
+
+  return ["Todos", ...ordered];
+}, [projects]);
 
   const filteredProjects =
     selectedCategory === "Todos"

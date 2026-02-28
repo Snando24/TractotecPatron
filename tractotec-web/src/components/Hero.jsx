@@ -50,7 +50,7 @@ function Hero() {
             {/* Contenido */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 text-white">
                 <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
-                    Servicios de industrilales
+                    Servicios industriales
                     <span className="block text-red-600 mt-2">
                         de Maquinaria Pesada
                     </span>
@@ -72,7 +72,7 @@ function Hero() {
                     </a>
 
                     <a
-                        href="#proyectos"
+                        href="proyectos"
                         className="bg-red-600 text-white px-7 py-3 rounded-md hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-red-600/40"
                     >
                         Ver Proyectos

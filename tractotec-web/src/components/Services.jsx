@@ -1,18 +1,26 @@
 import { Wrench, Truck, Factory } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Services() {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/proyectos");
+    window.scrollTo(0, 0); // Hace scroll arriba al cambiar de página
+  };
+
   const services = [
+    {
+      icon: <Truck size={40} />,
+      title: "Traccionamiento",
+      description:
+        "Sistemas de transmisión, refuerzos estructurales y soluciones mecánicas personalizadas.",
+    },
     {
       icon: <Factory size={40} />,
       title: "Fabricación Industrial",
       description:
         "Diseño y construcción de tolvas, carretas, cisternas y estructuras metálicas de alta resistencia.",
-    },
-    {
-      icon: <Truck size={40} />,
-      title: "Traccionamiento y Adaptaciones",
-      description:
-        "Sistemas de transmisión, refuerzos estructurales y soluciones mecánicas personalizadas.",
     },
     {
       icon: <Wrench size={40} />,
@@ -51,7 +59,8 @@ function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg border border-gray-800 hover:border-red-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
+              onClick={handleNavigation}
+              className="cursor-pointer group relative bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg border border-gray-800 hover:border-red-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
             >
               {/* Icono */}
               <div className="text-yellow-500 mb-6 group-hover:text-red-600 transition-colors duration-300">
@@ -59,7 +68,7 @@ function Services() {
               </div>
 
               {/* Título */}
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-red-500 transition-colors duration-300">
                 {service.title}
               </h3>
 
@@ -67,6 +76,9 @@ function Services() {
               <p className="text-gray-400 leading-relaxed">
                 {service.description}
               </p>
+
+              {/* Línea animada inferior */}
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-500"></div>
             </div>
           ))}
         </div>
