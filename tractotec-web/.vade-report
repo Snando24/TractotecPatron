@@ -1,0 +1,44 @@
+# Vercel Web Analytics Implementation
+
+Successfully implemented Vercel Web Analytics for the TractotecPatron project.
+
+## Changes Made
+
+### 1. Package Installation
+- Installed `@vercel/analytics` version 1.6.1
+- Updated package.json and package-lock.json with the new dependency
+
+### 2. Analytics Integration
+- Modified `src/App.jsx` to integrate Vercel Web Analytics
+- Added import statement: `import { Analytics } from "@vercel/analytics/react";`
+- Added `<Analytics />` component inside the Router, after the Layout component
+- This placement ensures analytics tracks all routes properly with React Router
+
+### 3. Implementation Details
+- This is a React application built with Vite and React Router
+- Following the Vercel documentation for React apps (create-react-app style implementation)
+- The Analytics component is placed at the root level to track all page views and route changes
+- The implementation includes automatic route detection for the following pages:
+  - / (Home)
+  - /servicios (Services)
+  - /proyectos (Projects)
+  - /nosotros (About)
+  - /contacto (Contact)
+
+### 4. Verification
+- Build completed successfully with no errors related to the analytics implementation
+- The analytics package is properly integrated and will start tracking once deployed to Vercel
+- The implementation follows React best practices and maintains the existing code structure
+
+## Next Steps for User
+
+After deployment to Vercel:
+1. Enable Web Analytics in the Vercel Dashboard (Project → Analytics tab → Enable)
+2. Deploy the application using `vercel deploy`
+3. Visit `/_vercel/insights/view` endpoint to verify analytics is working
+4. View analytics data in the Vercel Dashboard under the Analytics tab
+
+## Notes
+- The linter reported 2 pre-existing errors in other files (ProjectGallery.jsx and projectsLoader.js) that are unrelated to this implementation
+- These pre-existing issues should be addressed separately
+- The analytics implementation itself is clean and follows best practices
