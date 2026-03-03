@@ -15,9 +15,9 @@ function ProjectsPreview() {
       category: "Traccionamiento",
     },
     {
-      title: "Siniestros de Chasis",
+      title: "Siniestros de chasis",
       image: "/images/proyectos/Traccionamiento/siniestros_chasis/img_1.jpeg",
-      category: "Siniestros de Chasis",
+      category: "Siniestros de chasis",
     },
     {
       title: "Mantenimiento",
