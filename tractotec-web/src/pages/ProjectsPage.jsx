@@ -2,9 +2,12 @@ import { useState, useMemo } from "react";
 import { loadProjects, getProjectImages } from "../utils/projectsLoader";
 import { getGridColsClass } from "../utils/gridHelper";
 import ImageModal from "../components/ImageModal";
+import { useSearchParams } from "react-router-dom";
 
 function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [searchParams] = useSearchParams();
+  const initialCategory = searchParams.get("categoria") || "Todos";
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Cargar proyectos dinámicamente
@@ -12,20 +15,21 @@ function ProjectsPage() {
 
   // Extraer categorías únicas de los proyectos
   const categories = useMemo(() => {
-  const desiredOrder = [
-    "Traccionamiento",
-    "Pintura Industrial",
-    "Reparación Pistones",
-    "Fabricación",
-    "Mantenimiento",
-  ];
+    const desiredOrder = [
+      "Traccionamiento",
+      "Siniestros de chasis",
+      "Pintura Industrial",
+      "Reparación Pistones",
+      "Fabricación",
+      "Mantenimiento",
+    ];
 
-  const cats = new Set(projects.map((p) => p.category));
+    const cats = new Set(projects.map((p) => p.category));
 
-  const ordered = desiredOrder.filter((cat) => cats.has(cat));
+    const ordered = desiredOrder.filter((cat) => cats.has(cat));
 
-  return ["Todos", ...ordered];
-}, [projects]);
+    return ["Todos", ...ordered];
+  }, [projects]);
 
   const filteredProjects =
     selectedCategory === "Todos"
@@ -51,11 +55,10 @@ function ProjectsPage() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-md border transition ${
-                selectedCategory === category
+              className={`px-6 py-2 rounded-md border transition ${selectedCategory === category
                   ? "bg-red-600 border-red-600 text-white"
                   : "border-gray-700 hover:border-red-600 text-gray-300 hover:text-white"
-              }`}
+                }`}
             >
               {category}
             </button>

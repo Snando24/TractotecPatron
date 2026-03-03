@@ -1,4 +1,4 @@
-import { Wrench, Truck, Factory } from "lucide-react";
+import { Wrench, Truck, Factory, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 function Services() {
@@ -6,7 +6,7 @@ function Services() {
 
   const handleNavigation = () => {
     navigate("/proyectos");
-    window.scrollTo(0, 0); // Hace scroll arriba al cambiar de página
+    window.scrollTo(0, 0);
   };
 
   const services = [
@@ -15,6 +15,12 @@ function Services() {
       title: "Traccionamiento",
       description:
         "Sistemas de transmisión, refuerzos estructurales y soluciones mecánicas personalizadas.",
+    },
+    {
+      icon: <AlertTriangle size={40} />,
+      title: "Atención de Siniestros",
+      description:
+        "Recuperación estructural de chasis, reparación por impacto y restauración integral de maquinaria pesada afectada por siniestros operativos.",
     },
     {
       icon: <Factory size={40} />,
@@ -28,6 +34,7 @@ function Services() {
       description:
         "Reparación estructural, soldadura industrial y optimización de maquinaria pesada.",
     },
+    
   ];
 
   return (
@@ -55,7 +62,7 @@ function Services() {
         <div className="w-20 h-1 bg-red-600 mb-16"></div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {services.map((service, index) => (
             <div
               key={index}

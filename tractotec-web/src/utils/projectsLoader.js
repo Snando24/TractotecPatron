@@ -17,6 +17,11 @@ export function loadProjects() {
       category: "Traccionamiento",
       path: "Traccionamiento/traccionamiento_chasis",
     },
+    "Traccionamiento/siniestros_chasis": {
+      title: "Siniestros de chasis",
+      category: "Siniestros de chasis",
+      path: "Traccionamiento/siniestros_chasis",
+    },
     "Traccionamiento/virado_chasis": {
       title: "Virado de Chasis",
       category: "Traccionamiento",
