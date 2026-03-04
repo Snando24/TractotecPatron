@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contacto" element={<ContactPage />} />
         </Routes>
       </Layout>
+      <Analytics />
     </Router>
   );
 }
