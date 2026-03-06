@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://tractotec.com/</loc>
-<lastmod>2026-03-04</lastmod>
 <priority>1.00</priority>
 </url>
 
 <url>
 <loc>https://tractotec.com/servicios</loc>
-<priority>0.80</priority>
+<priority>0.90</priority>
 </url>
 
 <url>
 <loc>https://tractotec.com/proyectos</loc>
+<priority>0.90</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/traccionamiento-chasis</loc>
+<priority>0.95</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/siniestros-chasis</loc>
+<priority>0.90</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/pintura-industrial</loc>
+<priority>0.80</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/reparacion-pistones</loc>
+<priority>0.80</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/fabricacion-industrial</loc>
+<priority>0.80</priority>
+</url>
+
+<url>
+<loc>https://tractotec.com/proyectos/mantenimiento-maquinaria</loc>
 <priority>0.80</priority>
 </url>
 
