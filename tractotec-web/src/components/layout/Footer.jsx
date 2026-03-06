@@ -17,9 +17,11 @@ function Footer() {
             </h2>
 
             <p className="text-gray-400 text-sm leading-relaxed">
-              Especialistas en fabricación, adaptación y mantenimiento
-              de maquinaria pesada y estructuras metálicas industriales.
-              Comprometidos con calidad, seguridad y eficiencia operativa.
+              TractoTec ofrece servicios especializados de traccionamiento
+               de chasis para camiones y maquinaria pesada en Huancayo. 
+               Nuestro equipo realiza alineación, reparación y enderezado 
+               de chasis, garantizando la recuperación estructural de 
+               vehículos y equipos industriales.
             </p>
           </div>
 

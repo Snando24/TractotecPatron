@@ -61,8 +61,8 @@ function Hero() {
         <div className="w-24 h-1 bg-red-600 mt-6 mb-6"></div>
 
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
-          Soluciones industriales en traccionamiento, estructuras metálicas
-          y fabricación de equipos de alto rendimiento.
+          Especialistas en traccionamiento de chasis, estructuras metálicas
+          y fabricación de equipos industriales de alto rendimiento.
         </p>
 
         <div className="flex gap-6 mt-2">
