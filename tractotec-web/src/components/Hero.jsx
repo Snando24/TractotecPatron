@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 function Hero() {
   const slides = [
     "/images/Fondos/Fondo_Logo_Hero.png",
-    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80",
+    "/images/proyectos/Traccionamiento/traccionamiento_chasis/img_1.jpeg",
   ];
 
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    // Preload imágenes
     slides.forEach((src) => {
       const img = new Image();
       img.src = src;
@@ -25,8 +24,6 @@ function Hero() {
 
   return (
     <section className="relative h-[90vh] flex items-center overflow-hidden">
-
-      {/* Slides con crossfade */}
       {slides.map((src, i) => (
         <div
           key={src}
@@ -39,7 +36,6 @@ function Hero() {
         />
       ))}
 
-      {/* Overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -49,8 +45,11 @@ function Hero() {
         }}
       />
 
-      {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-white">
+        <p className="text-yellow-500 font-semibold uppercase tracking-widest text-sm mb-4">
+          Huancayo, Junín — Perú
+        </p>
+
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
           Servicios industriales
           <span className="block text-red-600 mt-2">
@@ -58,16 +57,14 @@ function Hero() {
           </span>
         </h1>
 
-        <div className="w-24 h-1 bg-red-600 mt-6 mb-6"></div>
+        <div className="w-24 h-1 bg-red-600 mt-6 mb-6" />
 
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
           Especialistas en traccionamiento de chasis, estructuras metálicas
           y fabricación de equipos industriales de alto rendimiento.
         </p>
 
-        <div className="flex gap-6 mt-2">
-
-          {/* Botón Cotización */}
+        <div className="flex flex-wrap gap-4 mt-2">
           <a
             href="#contacto"
             className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-7 py-3 rounded-md transition-all duration-300 shadow-lg hover:shadow-yellow-500/40"
@@ -75,7 +72,6 @@ function Hero() {
             Solicitar Cotización
           </a>
 
-          {/* Botón Proyectos */}
           <Link
             to="/proyectos"
             onClick={() => window.scrollTo(0, 0)}
@@ -84,6 +80,12 @@ function Hero() {
             Ver Proyectos
           </Link>
 
+          <a
+            href="#trabajos-recientes"
+            className="border border-gray-600 hover:border-red-600 text-white px-7 py-3 rounded-md transition-all duration-300"
+          >
+            Trabajos Recientes
+          </a>
         </div>
       </div>
     </section>

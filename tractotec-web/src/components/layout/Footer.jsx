@@ -48,6 +48,11 @@ function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/nosotros" className="hover:text-red-600 transition">
+                  Nosotros
+                </Link>
+              </li>
+              <li>
                 <Link to="/contacto" className="hover:text-red-600 transition">
                   Contacto
                 </Link>

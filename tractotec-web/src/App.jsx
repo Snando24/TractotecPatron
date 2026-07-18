@@ -9,6 +9,7 @@ import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import AdminProjectsPage from "./pages/AdminProjectsPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/proyectos/:slug" element={<ProjectsPage />} />
           <Route path="/nosotros" element={<AboutPage />} />
           <Route path="/contacto" element={<ContactPage />} />
+          <Route path="/admin/proyectos" element={<AdminProjectsPage />} />
         </Routes>
       </Layout>
       <Analytics />
