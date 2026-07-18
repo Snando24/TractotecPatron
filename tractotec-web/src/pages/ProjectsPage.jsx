@@ -114,8 +114,6 @@ function ProjectsPage() {
         <section className="bg-black py-16">
           <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
             {filteredProjects.map((project) => {
-              const status = PROJECT_STATUS[project.status];
-
               return (
                 <button
                   key={project.id}
@@ -130,14 +128,6 @@ function ProjectsPage() {
                   />
 
                   <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition" />
-
-                  <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                    <span
-                      className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full ${status.className}`}
-                    >
-                      {status.label}
-                    </span>
-                  </div>
 
                   <div className="absolute bottom-0 p-6 w-full">
                     <p className="text-xs text-gray-400 mb-2">
@@ -168,17 +158,11 @@ function ProjectsPage() {
           <div className="max-w-7xl mx-auto px-6 space-y-20">
             {filteredProjects.map((project) => {
               const images = getProjectImages(project.folder);
-              const status = PROJECT_STATUS[project.status];
 
               return (
                 <div key={project.id} className="space-y-10">
                   <div className="border-l-4 border-red-600 pl-6">
                     <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <span
-                        className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${status.className}`}
-                      >
-                        {status.label}
-                      </span>
                       <span className="text-xs text-gray-500">
                         {formatDateShort(project.date)}
                       </span>
