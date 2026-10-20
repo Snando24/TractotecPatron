@@ -1,13 +1,14 @@
 import { Circle } from "lucide-react";
-import { loadProjects } from "../utils/projectsLoader";
+import { useProjects } from "../hooks/useProjects";
+import { sortByDate } from "../utils/projectsLoader";
 import { PROJECT_STATUS } from "../constants/projects";
 import { formatDateRelative } from "../utils/dateUtils";
 
 function WorkshopTicker() {
-  const updates = loadProjects()
-    .filter((project) => project.status === "en_progreso" || project.featured)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 6);
+  const projects = useProjects();
+  const updates = sortByDate(
+    projects.filter((project) => project.status === "en_progreso" || project.featured)
+  ).slice(0, 6);
 
   if (updates.length === 0) return null;
 
@@ -32,7 +33,7 @@ function WorkshopTicker() {
         <div className="overflow-hidden flex-1">
           <div className="animate-marquee flex gap-10 whitespace-nowrap">
             {items.map((project, index) => {
-              const status = PROJECT_STATUS[project.status];
+              const status = PROJECT_STATUS[project.status] ?? PROJECT_STATUS.completado;
 
               return (
                 <div

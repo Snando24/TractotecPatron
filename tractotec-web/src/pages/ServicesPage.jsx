@@ -1,15 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Seo from "../components/seo/Seo";
 
 function ServicesPage() {
   const navigate = useNavigate();
 
-  const goToProjects = (categoria) => {
-    navigate(`/proyectos?categoria=${encodeURIComponent(categoria)}`);
-    window.scrollTo(0, 0);
+  const goToProjects = (slug) => {
+    navigate(`/proyectos/${slug}`);
   };
 
   return (
     <div className="text-white">
+      <Seo
+        title="Servicios: Traccionamiento, Fabricación y Mantenimiento | TractoTec"
+        description="Traccionamiento y enderezado de chasis, fabricación de tolvas y estructuras metálicas, mantenimiento y reparación de maquinaria pesada en Huancayo."
+        path="/servicios"
+      />
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-black via-gray-900 to-black py-24 text-center">
@@ -40,23 +45,26 @@ function ServicesPage() {
             </ul>
 
             <button
-              onClick={() => goToProjects("Traccionamiento")}
+              type="button"
+              onClick={() => goToProjects("traccionamiento-chasis")}
               className="mt-6 bg-red-600 hover:bg-red-700 px-6 py-2 rounded-md transition"
             >
               Ver Proyectos
             </button>
           </div>
 
-          <div
-            onClick={() => goToProjects("Traccionamiento")}
-            className="cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
+          <button
+            type="button"
+            onClick={() => goToProjects("traccionamiento-chasis")}
+            aria-label="Ver proyectos"
+            className="block w-full cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
           >
             <img
               src="/images/proyectos/Traccionamiento/virado_chasis/img_3.jpeg"
-              alt="Traccionamiento"
+              alt="Chasis de camión en proceso de traccionamiento"
               className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
             />
-          </div>
+          </button>
 
         </div>
       </section>
@@ -65,16 +73,18 @@ function ServicesPage() {
       <section className="bg-gray-950 py-20">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
-          <div
-            onClick={() => goToProjects("Fabricación")}
-            className="cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
+          <button
+            type="button"
+            onClick={() => goToProjects("fabricacion-industrial")}
+            aria-label="Ver proyectos"
+            className="block w-full cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
           >
             <img
               src="/images/proyectos/Fabricación/fabricacion_tolvas/img_7.jpeg"
-              alt="Fabricación"
+              alt="Tolva metálica fabricada en taller"
               className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
             />
-          </div>
+          </button>
 
           <div>
             <h2 className="text-3xl font-bold mb-6">
@@ -90,7 +100,8 @@ function ServicesPage() {
             </ul>
 
             <button
-              onClick={() => goToProjects("Fabricación")}
+              type="button"
+              onClick={() => goToProjects("fabricacion-industrial")}
               className="mt-6 bg-red-600 hover:bg-red-700 px-6 py-2 rounded-md transition"
             >
               Ver Proyectos
@@ -117,23 +128,26 @@ function ServicesPage() {
             </ul>
 
             <button
-              onClick={() => goToProjects("Mantenimiento")}
+              type="button"
+              onClick={() => goToProjects("mantenimiento-maquinaria")}
               className="mt-6 bg-red-600 hover:bg-red-700 px-6 py-2 rounded-md transition"
             >
               Ver Proyectos
             </button>
           </div>
 
-          <div
-            onClick={() => goToProjects("Mantenimiento")}
-            className="cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
+          <button
+            type="button"
+            onClick={() => goToProjects("mantenimiento-maquinaria")}
+            aria-label="Ver proyectos"
+            className="block w-full cursor-pointer bg-gray-900 h-80 rounded-lg border border-gray-800 overflow-hidden group"
           >
             <img
               src="/images/proyectos/Mantenimiento/mantenimiento-maquinaria/img_7.jpeg"
-              alt="Mantenimiento"
+              alt="Mantenimiento de maquinaria pesada en taller"
               className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
             />
-          </div>
+          </button>
 
         </div>
       </section>
@@ -144,12 +158,12 @@ function ServicesPage() {
           ¿Necesitas una <span className="text-yellow-500">Solución Industrial</span>?
         </h2>
 
-        <a
-          href="/contacto"
-          className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-md transition"
+        <Link
+          to="/contacto"
+          className="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-md transition"
         >
           Solicitar Cotización
-        </a>
+        </Link>
       </section>
 
     </div>

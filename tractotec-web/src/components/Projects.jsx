@@ -1,13 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import { getCategoryPreviews } from "../utils/projectsLoader";
+import { useProjects } from "../hooks/useProjects";
 
 function ProjectsPreview() {
   const navigate = useNavigate();
-  const projects = getCategoryPreviews();
+  const projects = getCategoryPreviews(useProjects());
 
   const handleNavigation = (slug) => {
     navigate(`/proyectos/${slug}`);
-    window.scrollTo(0, 0);
   };
 
   return (
@@ -25,14 +25,17 @@ function ProjectsPreview() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10 mb-16">
           {projects.map((project) => (
-            <div
+            <button
+              type="button"
               key={project.slug}
               onClick={() => handleNavigation(project.slug)}
-              className="group cursor-pointer relative overflow-hidden rounded-xl border border-gray-800 hover:border-red-600 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
+              className="group text-left cursor-pointer relative overflow-hidden rounded-xl border border-gray-800 hover:border-red-600 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
             >
               <img
                 src={project.image}
                 alt={project.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
               />
 
@@ -49,14 +52,13 @@ function ProjectsPreview() {
               </div>
 
               <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-red-600 group-hover:w-full transition-all duration-500" />
-            </div>
+            </button>
           ))}
         </div>
 
         <div className="text-center">
           <Link
             to="/proyectos"
-            onClick={() => window.scrollTo(0, 0)}
             className="inline-block bg-red-600 hover:bg-red-700 text-white px-10 py-3 rounded-md font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30"
           >
             Ver todos los proyectos

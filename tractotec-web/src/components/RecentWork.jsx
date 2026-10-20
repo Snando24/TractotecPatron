@@ -1,16 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Calendar, ArrowRight } from "lucide-react";
 import { getFeaturedProjects } from "../utils/projectsLoader";
-import { PROJECT_STATUS, WHATSAPP_NUMBER } from "../constants/projects";
+import { useProjects } from "../hooks/useProjects";
+import { PROJECT_STATUS } from "../constants/projects";
+import { whatsappLink } from "../constants/site";
 import { formatDateRelative, formatDateShort } from "../utils/dateUtils";
 
 function RecentWork() {
   const navigate = useNavigate();
-  const projects = getFeaturedProjects(4);
+  const projects = getFeaturedProjects(useProjects(), 4);
 
   const handleNavigation = (slug) => {
     navigate(`/proyectos/${slug}`);
-    window.scrollTo(0, 0);
   };
 
   return (
@@ -36,7 +37,6 @@ function RecentWork() {
 
           <Link
             to="/proyectos?filtro=recientes"
-            onClick={() => window.scrollTo(0, 0)}
             className="inline-flex items-center gap-2 text-red-500 hover:text-red-400 font-semibold transition shrink-0"
           >
             Ver todos los proyectos
@@ -46,7 +46,7 @@ function RecentWork() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project) => {
-            const status = PROJECT_STATUS[project.status];
+            const status = PROJECT_STATUS[project.status] ?? PROJECT_STATUS.completado;
 
             return (
               <article
@@ -58,10 +58,13 @@ function RecentWork() {
                     type="button"
                     onClick={() => handleNavigation(project.slug)}
                     className="relative h-48 sm:h-full overflow-hidden cursor-pointer"
+                    aria-label={`Ver galería de ${project.title}`}
                   >
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent sm:bg-black/20" />
@@ -88,8 +91,8 @@ function RecentWork() {
                     </p>
 
                     <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-800">
-                      <div className="flex items-center gap-2 text-gray-500 text-sm">
-                        <Calendar size={15} className="text-yellow-500" />
+                      <div className="flex items-center gap-2 text-gray-400 text-sm">
+                        <Calendar size={15} className="text-yellow-500" aria-hidden="true" />
                         <span title={formatDateShort(project.date)}>
                           {formatDateRelative(project.date)}
                         </span>
@@ -104,7 +107,7 @@ function RecentWork() {
                           Ver galería
                         </button>
                         <a
-                          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola TractoTec, vi su trabajo de "${project.title}" y me gustaría solicitar una cotización.`)}`}
+                          href={whatsappLink(`Hola TractoTec, vi su trabajo de "${project.title}" y me gustaría solicitar una cotización.`)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm text-yellow-500 hover:text-yellow-400 font-semibold transition"

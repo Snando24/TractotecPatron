@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Hero() {
-  const slides = [
-    "/images/Fondos/Fondo_Logo_Hero.png",
-    "/images/proyectos/Traccionamiento/traccionamiento_chasis/img_1.jpeg",
-  ];
+const slides = [
+  "/images/Fondos/Fondo_Logo_Hero.png",
+  "/images/proyectos/Traccionamiento/traccionamiento_chasis/img_1.jpeg",
+];
 
+function Hero() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -15,18 +15,22 @@ function Hero() {
       img.src = src;
     });
 
+    // Respetar usuarios que prefieren menos movimiento
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return undefined;
+
     const id = setInterval(() => {
       setActive((s) => (s + 1) % slides.length);
     }, 6000);
 
     return () => clearInterval(id);
-  }, []); // eslint-disable-line
+  }, []);
 
   return (
     <section className="relative h-[90vh] flex items-center overflow-hidden">
       {slides.map((src, i) => (
         <div
           key={src}
+          aria-hidden="true"
           className="absolute inset-0 bg-center bg-cover transition-opacity duration-1000"
           style={{
             backgroundImage: `url('${src}')`,
@@ -74,7 +78,6 @@ function Hero() {
 
           <Link
             to="/proyectos"
-            onClick={() => window.scrollTo(0, 0)}
             className="bg-red-600 text-white px-7 py-3 rounded-md hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-red-600/40"
           >
             Ver Proyectos

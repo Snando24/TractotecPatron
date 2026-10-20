@@ -1,5 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+.vite/
+.vercel/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+*.local
+!.env.example
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +25,23 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Testing and coverage
+coverage/
 
-# Editor directories and files
+# IDE
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local reference library (no versionar)
+/PROJECT_BASE/

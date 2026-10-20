@@ -25,4 +25,6 @@ export const PROJECT_STATUS = {
   completado: { label: "Completado", className: "bg-green-600 text-white" },
 };
 
-export const WHATSAPP_NUMBER = "51921786182";
+import { COMPANY } from "./site";
+
+export const WHATSAPP_NUMBER = COMPANY.whatsapp;
