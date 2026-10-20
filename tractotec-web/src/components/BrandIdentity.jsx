@@ -7,7 +7,8 @@ function BrandIdentity() {
         <div className="flex justify-center">
           <img
             src="/branding/santo.png"
-            alt="Patrón del Negocio"
+            alt="Imagen del santo patrón Santiago, parte de la identidad de TractoTec"
+            loading="lazy"
             className="h-96 object-contain drop-shadow-2xl"
           />
         </div>

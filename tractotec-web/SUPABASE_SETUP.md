@@ -1,31 +1,31 @@
-# Configuración de Supabase para almacenamiento persistente en Vercel
+# Configuración de Supabase (trabajos del panel admin)
 
-## ¿Por qué Supabase?
-Sin una base de datos en la nube, los trabajos que agregues al panel admin se pierden al desplegar. Supabase es una base de datos PostgreSQL gratis y fácil de usar.
+Los proyectos base del sitio viven en `src/data/defaultProjects.js` (imágenes en `public/images/proyectos/`).
+Los trabajos que se agregan desde `/admin/proyectos` se guardan en Supabase:
 
-## Paso 1: Crear cuenta en Supabase
+- **Tabla `projects`** (Postgres) → datos del trabajo.
+- **Bucket `project-images`** (Storage) → imágenes subidas.
+- **Supabase Auth** → inicio de sesión del administrador.
 
-1. Ve a https://supabase.com
-2. Regístrate con tu email
-3. Crea un nuevo proyecto:
-   - **Name:** tractotec
-   - **Database password:** (guarda este password, lo necesitarás)
-   - **Region:** Lima o la más cercana
+> La `anon key` es pública por diseño (va en el bundle del navegador). La protección real
+> la dan las **políticas RLS** de este documento. Nunca uses la `service_role` key en el frontend.
 
-## Paso 2: Crear la tabla de proyectos
+## 1. Crear el proyecto
 
-Una vez en el proyecto:
+1. https://supabase.com → nuevo proyecto (región más cercana a Perú disponible).
+2. Guarda la contraseña de la base de datos en un gestor de contraseñas (no en el repositorio).
 
-1. Ve a **SQL Editor**
-2. Ejecuta esta query:
+## 2. Tabla y políticas RLS
+
+En **SQL Editor** ejecuta:
 
 ```sql
-CREATE TABLE projects (
+CREATE TABLE IF NOT EXISTS projects (
   id BIGINT PRIMARY KEY,
   title TEXT NOT NULL,
   category TEXT NOT NULL,
   summary TEXT NOT NULL,
-  status TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('completado', 'en_progreso')),
   date TEXT NOT NULL,
   featured BOOLEAN DEFAULT false,
   image TEXT,
@@ -33,42 +33,70 @@ CREATE TABLE projects (
   images TEXT[] DEFAULT ARRAY[]::TEXT[],
   created_at TIMESTAMP DEFAULT NOW()
 );
+
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+
+-- Lectura pública (la web muestra los trabajos)
+CREATE POLICY "projects_public_read" ON projects
+  FOR SELECT USING (true);
+
+-- Escritura solo para usuarios autenticados (administradores)
+CREATE POLICY "projects_admin_insert" ON projects
+  FOR INSERT TO authenticated WITH CHECK (true);
+
+CREATE POLICY "projects_admin_delete" ON projects
+  FOR DELETE TO authenticated USING (true);
 ```
 
-## Paso 3: Obtener las credenciales
+Si la tabla ya existía, ejecuta solo desde `ALTER TABLE`. Si antes se guardaron imágenes en
+base64 dentro de `images`, conviene borrar esas filas y volver a cargarlas desde el panel.
 
-1. Ve a **Settings → API**
-2. Copia:
-   - **Project URL** → será tu `VITE_SUPABASE_URL`
-   - **anon public** → será tu `VITE_SUPABASE_ANON_KEY`
+## 3. Bucket de imágenes
 
-## Paso 4: Configurar en Vercel
+1. **Storage → New bucket** → nombre `project-images`, marcado como **Public**.
+2. En **SQL Editor**:
 
-1. Ve a tu proyecto en Vercel
-2. **Settings → Environment Variables**
-3. Agrega:
-   - **Name:** `VITE_SUPABASE_URL` → **Value:** [pega el Project URL]
-   - **Name:** `VITE_SUPABASE_ANON_KEY` → **Value:** [pega la anon public key]
+```sql
+CREATE POLICY "images_admin_upload" ON storage.objects
+  FOR INSERT TO authenticated WITH CHECK (bucket_id = 'project-images');
 
-## Paso 5: Hacer push y desplegar
-
-```bash
-git add .
-git commit -m "Integrate Supabase for persistent storage"
-git push
+CREATE POLICY "images_admin_delete" ON storage.objects
+  FOR DELETE TO authenticated USING (bucket_id = 'project-images');
 ```
 
-Vercel desplegará automáticamente. ¡Listo!
+(Opcional) En la configuración del bucket limita el tamaño a 5 MB y los tipos a
+`image/jpeg, image/png, image/webp`.
 
-## Cómo verificar que funciona
+## 4. Usuario administrador
 
-1. Abre tu web en producción
-2. Ve a `/admin/proyectos`
-3. Agrega un trabajo
-4. Recarga la página
-5. El trabajo debe seguir allí (ahora está en Supabase)
+1. **Authentication → Providers → Email**: activo.
+2. **Authentication → Sign In / Providers**: desactiva **Allow new users to sign up**
+   (solo tú creas cuentas).
+3. **Authentication → Users → Add user** → correo y contraseña robusta del administrador.
 
-## Notas
-- Los proyectos proyectos antiguos seguirán en el archivo de configuración
-- Solo los trabajos nuevos se guardan en Supabase
-- Si Supabase no está configurado, fallback a localStorage (funciona solo en local)
+> Importante: con el registro público desactivado, "authenticated" equivale a "administrador".
+> Si algún día se habilita el registro, hay que restringir las políticas (p. ej. por correo o rol).
+
+## 5. Variables de entorno
+
+**Settings → API**: copia *Project URL* y *anon public key*.
+
+En Vercel → **Settings → Environment Variables** (y en `.env.local` para desarrollo):
+
+| Variable | Valor |
+| --- | --- |
+| `VITE_SUPABASE_URL` | Project URL |
+| `VITE_SUPABASE_ANON_KEY` | anon public key |
+| `VITE_SUPABASE_BUCKET` | `project-images` (opcional, es el valor por defecto) |
+
+Vuelve a desplegar para que Vite incluya las variables.
+
+## 6. Verificación
+
+1. Abre `/admin/proyectos` e inicia sesión con el usuario creado.
+2. Agrega un trabajo con imágenes.
+3. Abre `/proyectos` en otra ventana: el trabajo debe aparecer junto a los proyectos base.
+4. Cierra sesión e intenta insertar desde la consola con la anon key: debe fallar (RLS).
+
+Si Supabase no está configurado, la web funciona solo con los proyectos base y el panel
+muestra "Panel no disponible".

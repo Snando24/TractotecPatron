@@ -1,6 +1,8 @@
 import { ShieldCheck, Hammer, Users } from "lucide-react";
 
-function About() {
+function About({ as = "h2" }) {
+  const Heading = as;
+
   return (
     <section id="nosotros" className="relative py-24 text-white overflow-hidden">
       
@@ -16,9 +18,9 @@ function About() {
         <div className="w-full h-[2px] bg-red-600 mb-16"></div>
 
         {/* Título */}
-        <h2 className="text-4xl font-bold mb-4">
+        <Heading className="text-4xl font-bold mb-4">
           Sobre <span className="text-red-600">Nosotros</span>
-        </h2>
+        </Heading>
 
         <div className="w-20 h-1 bg-red-600 mb-12"></div>
 
@@ -43,7 +45,7 @@ function About() {
           <div className="space-y-8">
 
             <div className="flex items-start gap-4">
-              <ShieldCheck className="text-yellow-500" size={40} />
+              <ShieldCheck size={40} aria-hidden="true" className="text-yellow-500 shrink-0" />
               <div>
                 <h3 className="font-semibold text-lg mb-1">
                   Calidad y Seguridad
@@ -55,7 +57,7 @@ function About() {
             </div>
 
             <div className="flex items-start gap-4">
-              <Hammer className="text-yellow-500" size={40} />
+              <Hammer size={40} aria-hidden="true" className="text-yellow-500 shrink-0" />
               <div>
                 <h3 className="font-semibold text-lg mb-1">
                   Experiencia Técnica
@@ -67,7 +69,7 @@ function About() {
             </div>
 
             <div className="flex items-start gap-4">
-              <Users className="text-yellow-500" size={40} />
+              <Users size={40} aria-hidden="true" className="text-yellow-500 shrink-0" />
               <div>
                 <h3 className="font-semibold text-lg mb-1">
                   Compromiso con el Cliente

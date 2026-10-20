@@ -4,32 +4,35 @@ import { useNavigate } from "react-router-dom";
 function Services() {
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
-    navigate("/proyectos");
-    window.scrollTo(0, 0);
+  const handleNavigation = (slug) => {
+    navigate(`/proyectos/${slug}`);
   };
 
   const services = [
     {
-      icon: <Truck size={40} />,
+      icon: <Truck size={40} aria-hidden="true" />,
+      slug: "traccionamiento-chasis",
       title: "Traccionamiento",
       description:
         "Sistemas de transmisión, refuerzos estructurales y soluciones mecánicas personalizadas.",
     },
     {
-      icon: <AlertTriangle size={40} />,
+      icon: <AlertTriangle size={40} aria-hidden="true" />,
+      slug: "siniestros-chasis",
       title: "Atención de Siniestros",
       description:
         "Recuperación estructural de chasis, reparación por impacto y restauración integral de maquinaria pesada afectada por siniestros operativos.",
     },
     {
-      icon: <Factory size={40} />,
+      icon: <Factory size={40} aria-hidden="true" />,
+      slug: "fabricacion-industrial",
       title: "Fabricación Industrial",
       description:
         "Diseño y construcción de tolvas, carretas, cisternas y estructuras metálicas de alta resistencia.",
     },
     {
-      icon: <Wrench size={40} />,
+      icon: <Wrench size={40} aria-hidden="true" />,
+      slug: "mantenimiento-maquinaria",
       title: "Mantenimiento y Reparación",
       description:
         "Reparación estructural, soldadura industrial y optimización de maquinaria pesada.",
@@ -63,11 +66,12 @@ function Services() {
 
         {/* Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              onClick={handleNavigation}
-              className="cursor-pointer group relative bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg border border-gray-800 hover:border-red-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
+          {services.map((service) => (
+            <button
+              type="button"
+              key={service.slug}
+              onClick={() => handleNavigation(service.slug)}
+              className="text-left cursor-pointer group relative bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg border border-gray-800 hover:border-red-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/10"
             >
               {/* Icono */}
               <div className="text-yellow-500 mb-6 group-hover:text-red-600 transition-colors duration-300">
@@ -86,7 +90,7 @@ function Services() {
 
               {/* Línea animada inferior */}
               <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-500"></div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
